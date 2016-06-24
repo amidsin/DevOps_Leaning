@@ -1,0 +1,4 @@
+Based on: https://learn.chef.io/learn-the-basics/ubuntu/set-up-your-own-server/
+wget curl https://omnitruck.chef.io/install.sh
+sudo bash ./install.sh chefdk
+
