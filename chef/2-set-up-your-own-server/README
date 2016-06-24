@@ -1,2 +1,12 @@
 Based on https://learn.chef.io/learn-the-basics/ubuntu/configure-a-resource/
 
+chef-client --local-mode hello.rb
+less /tmp/motd
+
+Use nano instead of echo 'hello robots' > /tmp/motd
+chef-client --local-mode hello.rb
+less /tmp/motd
+
+
+chef-client --local-mode goodbye.rb
+ls /tmp
