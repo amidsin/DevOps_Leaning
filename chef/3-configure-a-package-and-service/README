@@ -1,0 +1,67 @@
+#Since existing server with tt-rss is used for training and since tt-rss is using Apache, it is suggested to use Nginx instead of Apache.
+
+apt-get update
+nano webserver.rb
+#update apt cache and install nginx
+sudo chef-client --local-mode webserver.rb
+
+#There is a different in output of chef-client. It could be cuased by the fact that apt-get update was just executed.
+#Following ilnes were absent:
+#* file ...
+#+APT...
+#- update ...
+#But nginx apears to be installed:
+#  * apt_package[nginx] action install
+#    - install version 1.4.6-1ubuntu3.5 of package nginx
+
+sudo chef-client --local-mode webserver.rb
+
+#Temporarily stop Apache:
+sudo service apache2 stop
+
+nano webserver.rb
+#add service resource and actions for enabling and starting it.
+sudo service nginx status
+sudo chef-client --local-mode webserver.rb
+
+#checf file resource apears not to have action for moving a file:
+#https://docs.chef.io/resource_file.html
+#Is it correct?
+
+#/var/www/html/index.html appears to already exist. It contains default page for Apache.
+#Temporarily move it out of the way:
+sudo mv /var/www/html/index.html /var/www/html/index.html.apache
+
+nano webserver.rb
+#add a page
+sudo chef-client --local-mode webserver.rb
+
+curl localhost
+#Command apears to return default web page for Nginx instead of newly created /var/www/html/index.html
+#Restart Nginx
+sudo service nginx restart
+curl localhost
+#It stil return Nginx page.
+#Correct path to Nginx's index.html - /usr/share/nginx/html/index.html
+sudo mv /var/www/html/index.html.apache /var/www/html/index.html
+sudo mv /usr/share/nginx/html/index.html /usr/share/nginx/htmlindex.html.nginx
+nano webserver.rb
+#edit a script to create a file at the correct location
+
+sudo chef-client --local-mode webserver.rb
+curl localhost
+#Appears to working correctly
+#Check using webserver: aws.dgor.me
+# Works only after restarting Nginx
+sudo service nginx restart
+nano webserver.rb
+# Add a resources to stop Apache server
+sudo service nginx stop
+sudo service apache2 start
+sudo chef-client --local-mode webserver.rb
+
+#Housekeeping
+sudo mv /usr/share/nginx/html/index.html.nginx /usr/share/nginx/htmlindex.html
+sudo service nginx stop
+sudo service apache2 start
+sudo apt-get purge nginx

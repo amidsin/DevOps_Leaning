@@ -1,0 +1,12 @@
+To rename / move a file:
+git mv filename new_filename
+
+To checkin edited file, which was not checked out:
+git add filename
+
+To check status of local repository:
+git status
+
+To commit and push chnages (after editing, renaming files and directories):
+git commit -m 'Comment'
+git push
