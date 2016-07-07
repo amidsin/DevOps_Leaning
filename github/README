@@ -10,3 +10,10 @@ git status
 To commit and push chnages (after editing, renaming files and directories):
 git commit -m 'Comment'
 git push
+
+To check git log:
+git log
+
+To roll-back erroneous commit (replace 1 with any number of last commits):
+git reset --soft HEAD~1
+
