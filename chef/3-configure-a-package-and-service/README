@@ -1,6 +1,7 @@
 #Since existing server with tt-rss is used for training and since tt-rss is using Apache, it is suggested to use Nginx instead of Apache.
 
 apt-get update
+cd chef-repo
 nano webserver.rb
 #update apt cache and install nginx
 sudo chef-client --local-mode webserver.rb
