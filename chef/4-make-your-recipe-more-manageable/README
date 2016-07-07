@@ -1,0 +1,65 @@
+mkdir chef-repo
+cd chef-repo
+mkdir cookbooks
+cd cookbooks
+chef generate cookbook learn_chef_nginx
+
+#Result:
+The program 'chef' is currently not installed. You can install it by typing:
+sudo apt-get install filters
+
+#It appears to be necessary to install ChefDK
+cd ../..
+wget https://packages.chef.io/stable/ubuntu/12.04/chefdk_0.15.16-1_amd64.deb
+sudo dpkg -i chefdk_0.15.16-1_amd64.deb
+cd chef-repo/cookbooks/
+chef generate cookbook learn_chef_nginx
+
+#Output:
+Installing Cookbook Gems:
+Compiling Cookbooks...
+Recipe: code_generator::cookbook
+  * directory[/home/ubuntu/DevOps_Leaning/chef/4-make-your-recipe-more-manageable/chef-repo/cookbooks/learn_chef_nginx] action create
+    - create new directory /home/ubuntu/DevOps_Leaning/chef/4-make-your-recipe-more-manageable/chef-repo/cookbooks/learn_chef_nginx
+...
+Your cookbook is ready. Type `cd learn_chef_nginx` to start working.
+
+tree
+#Output appears to match tutorial
+
+chef generate template learn_chef_nginx index.html
+
+nano learn_chef_nginx/templates/default/index.html.erb
+# Add content according to tutorial
+
+nano learn_chef_nginx/recipes/default.rb
+#Copy content from 3-... and modify to reference template file. Use Ctrl-R to insert a file.
+#Move disabling of Apache before installing Nginx
+
+
+sudo chef-client --local-mode --runlist 'recipe[learn_chef_nginx]'
+#Output:
+/home/ubuntu/.chef/local-mode-cache/cache/cookbooks/learn_chef_nginx/recipes/default.rb:25: syntax error, unexpected tIDENTIFIER, expecting end-of-input
+	source 'index.html.erb'
+	             ^
+#Becuase forgot ' after filename of template location.
+
+nano learn_chef_nginx/recipes/default.rb
+
+sudo chef-client --local-mode --runlist 'recipe[learn_chef_nginx]'
+#Output:
+/home/ubuntu/.chef/local-mode-cache/cache/cookbooks/learn_chef_nginx/recipes/default.rb:28: unterminated string meets end of file
+#Becuase forgot ' after name of the service to restart
+
+nano learn_chef_nginx/recipes/default.rb
+
+sudo chef-client --local-mode --runlist 'recipe[learn_chef_nginx]'
+
+curl localhost
+#Apears to working as it should
+
+#Clean-up
+sudo service nginx stop
+sudo service apache2 start
+sudo apt-get purge nginx
+

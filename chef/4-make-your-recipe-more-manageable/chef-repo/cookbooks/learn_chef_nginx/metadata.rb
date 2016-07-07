@@ -1,0 +1,7 @@
+name 'learn_chef_nginx'
+maintainer 'The Authors'
+maintainer_email 'you@example.com'
+license 'all_rights'
+description 'Installs/Configures learn_chef_nginx'
+long_description 'Installs/Configures learn_chef_nginx'
+version '0.1.0'
