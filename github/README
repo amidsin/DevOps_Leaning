@@ -17,3 +17,15 @@ git log
 To roll-back erroneous commit (replace 1 with any number of last commits):
 git reset --soft HEAD~1
 
+To create SSH key
+#from: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/ 
+ssh-keygen -t rsa -b 4096 -C "amidsin1999@gmail.com"
+#[Enter] to confirm default location
+#Enter passphrase
+#Confirm passphrase
+ssh-add ~/.ssh/id_rsa
+#Enter passphrase
+cat ~/.ssh/id_rsa.pub
+#copy key to clipboard
+#on github.com profile > Settings > SSH and GPG keys > New SSH key; copy-paste key, enter title
+
