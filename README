@@ -1,0 +1,16 @@
+useful commands in nano
+M-A - Mark text from current position. To end selection ^K or M-6
+M-^ - Copy text to buffer- current line or whatever was selected (works after pressing second time)
+^K - Cut text to buffer - current line or whatever was marked with M-A
+^U - Paste text from buffer, which copied or cut
+^R - Insert text from another file
+^W - Search for text
+M-R - Search for text and replace it
+^C - Current position
+M-C - Current position constantly visible
+M-L - Long line wrapping enable/disable
+M-$ - Soft line wrapping enable / disable
+M-G - Go to line number and column number
+^O - Save file
+^X - exit nano while optionally saving a file
+
