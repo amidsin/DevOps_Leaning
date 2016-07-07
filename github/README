@@ -28,4 +28,5 @@ ssh-add ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub
 #copy key to clipboard
 #on github.com profile > Settings > SSH and GPG keys > New SSH key; copy-paste key, enter title
-
+ssh -T git@github.com
+Confirm connection
