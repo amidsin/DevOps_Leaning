@@ -1,7 +1,7 @@
 To rename / move a file:
 git mv filename new_filename
 
-To checkin edited file, which was not checked out:
+To check-in edited file, which was not checked out:
 git add filename
 
 To check status of local repository:
